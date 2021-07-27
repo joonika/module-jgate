@@ -1,0 +1,22 @@
+{
+  "name": "joonika/module-jgate",
+  "type": "library",
+  "description": "jgate module for joonika",
+  "keywords": [
+    "joonika",
+    "joonika framework",
+    "framework",
+    "jgate",
+    "module"
+  ],
+  "license": "MIT",
+  "require": {
+    "zircote/swagger-php": "dev-master"
+  },
+  "authors": [
+    {
+      "name": "Mohsen Jadidi",
+      "email": "mnjadidi@gmail.com"
+    }
+  ]
+}
