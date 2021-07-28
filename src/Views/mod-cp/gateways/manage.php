@@ -34,7 +34,7 @@ if (!empty($gateway)) {
             if($linkName=='-'){
                 echo alertInfo(__("please select tab"));
             }else{
-            $filePath = JK_SITE_PATH() . 'modules/jgate/Views/mod-cp/gateways/manageTabs/' . $linkName . '/index.php';
+            $filePath = JK_SITE_PATH() . 'vendor/joonika/module-jgate/src/Views/mod-cp/gateways/manageTabs/' . $linkName . '/index.php';
             if (file_exists($filePath)) {
                 ?>
                 <div class="card">

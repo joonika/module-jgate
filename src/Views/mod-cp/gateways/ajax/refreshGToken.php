@@ -28,7 +28,7 @@ if (empty($data['lastToken'])) {
             "id"=>$data['id']
         ]);
     }else{
-        echo alertWarning(\Modules\jgate\src\jgate::errorMessages($test['data']));
+        echo alertWarning(\Modules\jgate\src\jgate::errorMessages($test));
     }
 } else {
     $test = \Modules\jgate\src\jgate::request('checkToken', ["token" => $data['lastToken']], false, $data['id']);
