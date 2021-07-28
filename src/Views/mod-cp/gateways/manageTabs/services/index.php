@@ -4,15 +4,18 @@ if (isset($gatewayID)) {
     $services = \Modules\jgate\src\jgate::request('manage/servicesList', [
         "showRemoved" => $showRemoved
     ], false, $gatewayID);
+    ?>
+    <button type="button" class="btn btn-outline-primary btn-xs" onclick="addService()"><i
+                class="fal fa-plus"></i> <?= __("add service") ?></button>
+    <a type="button"
+       class="btn <?= !empty($_GET['showRemoved']) ? 'btn-primary' : 'btn-outline-secondary' ?> btn-xs"
+       href="<?= JK_DOMAIN_LANG() ?>cp/jgate/gateways/manage/<?= $gatewayID ?>/services<?= !empty($_GET['showRemoved']) ? '' : '?showRemoved=1' ?>"
+    ><i
+                class="fal fa-sync"></i> <?= __("show removed service") ?></a>
+
+    <?php
     if (!empty($services['data'])) {
         ?>
-        <button type="button" class="btn btn-outline-primary btn-xs" onclick="addService()"><i
-                    class="fal fa-plus"></i> <?= __("add service") ?></button>
-        <a type="button"
-           class="btn <?= !empty($_GET['showRemoved']) ? 'btn-primary' : 'btn-outline-secondary' ?> btn-xs"
-           href="<?= JK_DOMAIN_LANG() ?>cp/jgate/gateways/manage/<?= $gatewayID ?>/services<?= !empty($_GET['showRemoved']) ? '' : '?showRemoved=1' ?>"
-        ><i
-                    class="fal fa-sync"></i> <?= __("show removed service") ?></a>
         <table class="table text-left">
             <thead>
             <tr>
@@ -70,25 +73,26 @@ if (isset($gatewayID)) {
             </tbody>
         </table>
         <?php
-        \Joonika\Controller\AstCtrl::ADD_FOOTER_SCRIPTS('
+    }
+    \Joonika\Controller\AstCtrl::ADD_FOOTER_SCRIPTS('
 <script>
 function showAgents(serviceId=\'\') {
   $("#modal_global").modal("show");
       ' . ajax_load([
-                "url" => JK_DOMAIN_LANG() . 'cp/jgate/gateways/manageTabs/services/showAgents',
-                "data" => "{serviceId:serviceId,gatewayId:" . $gatewayID . "}",
-                "success_response" => "#modal_global_body",
-                "loading" => ['iclass-size' => 1, 'elem' => 'span']
-            ]) . '
+            "url" => JK_DOMAIN_LANG() . 'cp/jgate/gateways/manageTabs/services/showAgents',
+            "data" => "{serviceId:serviceId,gatewayId:" . $gatewayID . "}",
+            "success_response" => "#modal_global_body",
+            "loading" => ['iclass-size' => 1, 'elem' => 'span']
+        ]) . '
 }
 function addService(serviceId=\'\') {
   $("#modal_global").modal("show");
       ' . ajax_load([
-                "url" => JK_DOMAIN_LANG() . 'cp/jgate/gateways/manageTabs/services/addService',
-                "data" => "{gatewayId:" . $gatewayID . ",serviceId:serviceId}",
-                "success_response" => "#modal_global_body",
-                "loading" => ['iclass-size' => 1, 'elem' => 'span']
-            ]) . '
+            "url" => JK_DOMAIN_LANG() . 'cp/jgate/gateways/manageTabs/services/addService',
+            "data" => "{gatewayId:" . $gatewayID . ",serviceId:serviceId}",
+            "success_response" => "#modal_global_body",
+            "loading" => ['iclass-size' => 1, 'elem' => 'span']
+        ]) . '
 }
 function removeService(serviceId){
     swal({
@@ -103,12 +107,12 @@ if(result.value){
     $("#modal_global-body").html(\'' . loading_fa() . '\');
     $("#modal_global").modal("show");
   ' . ajax_load([
-                "data" => "{serviceId:serviceId,gatewayId:" . $gatewayID . "}",
-                "url" => JK_DOMAIN_LANG() . 'cp/jgate/gateways/manageTabs/services/removeService',
-                "success_response" => "#modal_global_body",
-                "loading" => [
-                ]
-            ]) . '
+            "data" => "{serviceId:serviceId,gatewayId:" . $gatewayID . "}",
+            "url" => JK_DOMAIN_LANG() . 'cp/jgate/gateways/manageTabs/services/removeService',
+            "success_response" => "#modal_global_body",
+            "loading" => [
+            ]
+        ]) . '
     }
 });
 }
@@ -126,12 +130,12 @@ if(result.value){
     $("#modal_global-body").html(\'' . loading_fa() . '\');
     $("#modal_global").modal("show");
   ' . ajax_load([
-                "data" => "{serviceId:serviceId,gatewayId:" . $gatewayID . "}",
-                "url" => JK_DOMAIN_LANG() . 'cp/jgate/gateways/manageTabs/services/changeStatus',
-                "success_response" => "#modal_global_body",
-                "loading" => [
-                ]
-            ]) . '
+            "data" => "{serviceId:serviceId,gatewayId:" . $gatewayID . "}",
+            "url" => JK_DOMAIN_LANG() . 'cp/jgate/gateways/manageTabs/services/changeStatus',
+            "success_response" => "#modal_global_body",
+            "loading" => [
+            ]
+        ]) . '
     }
 });
 }
@@ -148,12 +152,12 @@ if(result.value){
     $("#modal_global-body").html(\'' . loading_fa() . '\');
     $("#modal_global").modal("show");
   ' . ajax_load([
-                "data" => "{agent:agent,service:serviceId,gatewayId:" . $gatewayID . "}",
-                "url" => JK_DOMAIN_LANG() . 'cp/jgate/gateways/manageTabs/agents/removeRelation',
-                "success_response" => "#modal_global_body",
-                "loading" => [
-                ]
-            ]) . '
+            "data" => "{agent:agent,service:serviceId,gatewayId:" . $gatewayID . "}",
+            "url" => JK_DOMAIN_LANG() . 'cp/jgate/gateways/manageTabs/agents/removeRelation',
+            "success_response" => "#modal_global_body",
+            "loading" => [
+            ]
+        ]) . '
     }
 });
 }
@@ -170,15 +174,14 @@ if(result.value){
     $("#modal_global-body").html(\'' . loading_fa() . '\');
     $("#modal_global").modal("show");
   ' . ajax_load([
-                "data" => "{statusServiceChangeRelId:relId,agent:agent,serviceId:serviceId,gatewayId:" . $gatewayID . "}",
-                "url" => JK_DOMAIN_LANG() . 'cp/jgate/gateways/manageTabs/services/showAgents',
-                "success_response" => "#modal_global_body",
-                "loading" => false
-            ]) . '
+            "data" => "{statusServiceChangeRelId:relId,agent:agent,serviceId:serviceId,gatewayId:" . $gatewayID . "}",
+            "url" => JK_DOMAIN_LANG() . 'cp/jgate/gateways/manageTabs/services/showAgents',
+            "success_response" => "#modal_global_body",
+            "loading" => false
+        ]) . '
     }
 });
 }
 </script>
 ');
-    }
 }
