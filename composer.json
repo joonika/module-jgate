@@ -10,9 +10,6 @@
     "module"
   ],
   "license": "MIT",
-  "require": {
-    "zircote/swagger-php": "dev-master"
-  },
   "authors": [
     {
       "name": "Mohsen Jadidi",
