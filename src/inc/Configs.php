@@ -49,6 +49,11 @@ class Configs
                 "icon" => "fal fa-key",
                 "title" => __("services")
             ],[
+                "link" => 'servers',
+                "permissions" => "gateway_manage",
+                "icon" => "fal fa-key",
+                "title" => __("servers")
+            ],[
                 "link" => 'logs',
                 "permissions" => "gateway_manage",
                 "icon" => "fal fa-key",

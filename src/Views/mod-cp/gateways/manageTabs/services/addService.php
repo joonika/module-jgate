@@ -1,21 +1,33 @@
 <?php
 global $data;
 if (isset($_POST['gatewayId'])) {
+    $servers = \Modules\jgate\src\jgate::request('manage/serversList', [
+    ], false, $_POST['gatewayId']);
+    $serversList=[];
+    if(!empty($servers['data'])){
+        foreach ($servers['data'] as $serverList){
+            $serversList[$serverList['id']]=$serverList['id'].'-'.$serverList['name'];
+        }
+    }else{
+        echo alertDanger(__("not found any server"));
+
+    }
+
     if (isset($_POST['submit'])) {
         if (empty($_POST['serviceId'])) {
             $agents = \Modules\jgate\src\jgate::request('manage/service', [
                 "action" => "add",
-                "name" => $_POST['name'],
                 "method" => $_POST['method'],
-                "address" => $_POST['address'],
+                "serverId" => $_POST['serverId'],
+                "type" => $_POST['type'],
             ], false, $_POST['gatewayId']);
         } else {
             $agents = \Modules\jgate\src\jgate::request('manage/service', [
                 "action" => "edit",
                 "serviceId" => $_POST['serviceId'],
-                "name" => $_POST['name'],
                 "method" => $_POST['method'],
-                "address" => $_POST['address'],
+                "serverId" => $_POST['serverId'],
+                "type" => $_POST['type'],
             ], false, $_POST['gatewayId']);
         }
         if ($agents['success']) {
@@ -48,20 +60,19 @@ if (isset($_POST['gatewayId'])) {
     ]);
     echo div_container_row();
 
-
-    echo div_start('col-md-4');
-    echo \Joonika\Forms::field_text([
-        "name" => "name",
-        "title" => __("service name"),
-        "direction" => "ltr",
-    ]);
-    echo div_close();
-
     echo div_start('col-md-4');
     echo \Joonika\Forms::field_text([
         "name" => "method",
         "title" => __("service method"),
         "direction" => "ltr",
+    ]);
+    echo div_close();
+    echo div_start('col-md-4');
+    echo \Joonika\Forms::field_select([
+        "name" => "serverId",
+        "direction" => "ltr",
+        "title" => __("server"),
+        "array" => $serversList,
     ]);
     echo div_close();
     echo div_start('col-md-4');
@@ -74,24 +85,6 @@ if (isset($_POST['gatewayId'])) {
         ],
     ]);
     echo div_close();
-    echo div_start('col-md-8');
-    echo \Joonika\Forms::field_text([
-        "name" => "address",
-        "title" => __("address"),
-        "direction" => "ltr",
-    ]);
-    echo div_close();
-    echo div_start('col-md-4');
-    echo \Joonika\Forms::field_select([
-        "name" => "authLess",
-        "title" => __("auth less"),
-        "array" => [
-            0 => __("no"),
-            1 => __("yes"),
-        ],
-    ]);
-    echo div_close();
-
     echo div_container_row_close();
 
     echo \Joonika\Forms::field_submit([
@@ -100,9 +93,7 @@ if (isset($_POST['gatewayId'])) {
         "btn-class" => "btn btn-primary",
         "icon" => "fal fa-save"
     ]);
-
     echo \Joonika\Forms::form_end();
-
 }
 
 ?>

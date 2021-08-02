@@ -48,9 +48,15 @@ if (isset($gatewayID)) {
                 ?>
                 <tr>
                     <td><?= $service['id'] ?></td>
-                    <td><?= $service['name'] . '/' . $service['method']; ?></td>
+                    <td class="ltr"><?= $service['name'] . '/' . $service['method']; ?></td>
                     <td class="ltr">
-                        <?= $service['address'] ?></td>
+                        <?= $service['address'] ?>
+                        <?php
+                        if(!empty($service['addressTest'])){
+                            echo '<br/>'.$service['addressTest'];
+                        }
+                        ?>
+                    </td>
                     <td><?= $service['type'] ?></td>
                     <td><?= checkValueHtmlFa($service['authLess']) ?></td>
                     <td><?= $service['datetime'] ?></td>

@@ -8,7 +8,7 @@ if ($getopt) {
     $serviceId = !empty($_GET['serviceId']) ? $_GET['serviceId'] : null;
     $gatewayId = !empty($_GET['gatewayId']) ? $_GET['gatewayId'] : null;
     $agent = !empty($_GET['agent']) ? $_GET['agent'] : null;
-    $status = !empty($_GET['status']) ? $_GET['status'] : null;
+    $status = isset($_GET['status']) ? $_GET['status'] : null;
     $page = intval(($getopt['start'] / $getopt['length'])) + 1;
     $logs = \Modules\jgate\src\jgate::request('manage/logs', [
         "serviceId" => $serviceId,

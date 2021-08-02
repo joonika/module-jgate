@@ -144,7 +144,6 @@ class jgate
                 }
             }
         }
-
         if ($serviceName != 'getToken') {
             $gatewayIdToken = !empty($service['gatewayID']) ? $service['gatewayID'] : null;
             $checkToken = self::getToken($gatewayIdToken);
@@ -329,7 +328,11 @@ class jgate
             }
             $isJson = is_json($response, true, true);
             if (empty($isJson)) {
-                return self::returnResponse([], false, __("response type not valid"));
+                $txt=__("response type not valid");
+                if(JK_APP_DEBUG()){
+                    $txt=$response;
+                }
+                return self::returnResponse([], false,$txt );
             }
             $response = $isJson;
         }

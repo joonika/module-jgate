@@ -57,12 +57,10 @@ if (!empty($log_prepare['success'])) {
 
     echo div_start('col-md-3');
 
-    $arrayAgents = [];
+    $arrayStatuses = [];
     if (!empty($log_prepare['data']['statuses'])) {
         foreach ($log_prepare['data']['statuses'] as $result) {
-            if (!empty($result)) {
-                $arrayAgents[$result] = $result;
-            }
+            $arrayStatuses[$result] = $result;
         }
     }
 
@@ -72,7 +70,7 @@ if (!empty($log_prepare['success'])) {
         "id" => "status",
         "first" => true,
         "firstTitle" => __("all statuses"),
-        "array" => $arrayAgents,
+        "array" => $arrayStatuses,
     ]);
 
     echo div_close();
