@@ -26,23 +26,9 @@ if (empty($gateways)) {
     echo alertWarning(__("no gateway found"));
     die;
 }
-$gateways = $database->select("jgate_gateways", [
-    "id" => [
-        'id',
-        'title',
-        'slugControl',
-        'status',
-    ]
-], [
-    "status" => "active"
-]);
-if (empty($gateways)) {
-    echo alertWarning(__("no gateway found"));
-    die;
-}
 foreach ($gateways as $gateway) {
     $services = \Modules\jgate\src\jgate::request('manage/servicesList', ['rel'=>true], false, $gateway['id']);
-    if ($services['status'] == 200 && !empty($services['status'])) {
+    if ( !empty($services['data'])) {
         $servicesData = $services['data'];
         $dataInput = [];
         foreach ($servicesData as $service) {

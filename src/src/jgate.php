@@ -288,6 +288,7 @@ class jgate
             $ip = $_SERVER['REMOTE_ADDR'];
         }
         array_push($http_request_header, "clientIp: " . $ip);
+        array_push($http_request_header, "serverType: " . JK_SERVER_TYPE);
         if (self::$needToken && !in_array($serviceAddress, ['getToken', 'checkToken'])) {
             array_push($http_request_header, "token: " . self::$token);
             curl_setopt_array($curl, array(

@@ -7,10 +7,12 @@ if (!empty($_POST['gId'])) {
     ]);
     if (empty($gatewayServices)) {
         echo alertWarning(__("not found any service update, please update first"));
+        exit();
     }
     $isJson = is_json($gatewayServices, true, true);
     if (empty($isJson)) {
         echo alertWarning(__("not found any service update, please update first"));
+        exit();
     }
     $servicesArray = [];
     if (!empty($isJson)) {
