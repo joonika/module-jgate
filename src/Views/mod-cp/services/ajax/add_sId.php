@@ -18,7 +18,7 @@ echo \Joonika\Forms::form_create([
 ]);
 $userID = isset($_POST['userID']) ? $_POST['userID'] : JK_LOGINID();
 if (isset($_POST['submit'])) {
-    $database->insert('jgate_services_rel', [
+    $database->insert('jgate.jgate_services_rel', [
         "sId" => $_POST['sId'],
         "gId" => $_POST['gId'],
         "address" => $_POST['serviceAddress'],
@@ -35,7 +35,7 @@ echo \Joonika\Forms::field_hidden([
 ]);
 
 echo div_start("col-md-4");
-$gateways = $database->select("jgate_gateways", [
+$gateways = $database->select("jgate.jgate_gateways", [
     "id", "title"
 ]);
 $gatewaysArray = [];

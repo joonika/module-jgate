@@ -5,7 +5,7 @@ if (!$ACL->hasPermission('jgate_gateways')) {
     error403();
     die;
 }
-$data = $database->get('jgate_gateways', ['id', 'lastToken'], [
+$data = $database->get('jgate.jgate_gateways', ['id', 'lastToken'], [
     "id" => $_POST['id']
 ]);
 if (empty($data['lastToken'])) {
@@ -14,7 +14,7 @@ if (empty($data['lastToken'])) {
     if(!empty($test['success'])){
         echo alertSuccess(json_encode($test['data']));
         if(!empty($test['data']['token'])){
-            $database->update("jgate_gateways",[
+            $database->update("jgate.jgate_gateways",[
                 "lastToken"=>$test['data']['token'],
                 "lastTokenDate"=>now(),
             ],[
@@ -22,7 +22,7 @@ if (empty($data['lastToken'])) {
             ]);
             echo redirect_to_js('',1000);
         }
-        $database->update("jgate_gateways",[
+        $database->update("jgate.jgate_gateways",[
             "lastCheckToken"=>json_encode($test,JSON_UNESCAPED_UNICODE),
         ],[
             "id"=>$data['id']
@@ -38,7 +38,7 @@ if (empty($data['lastToken'])) {
     }else{
         echo alertWarning(\Modules\jgate\src\jgate::errorMessages($test));
     }
-    $database->update("jgate_gateways",[
+    $database->update("jgate.jgate_gateways",[
         "lastCheckToken"=>json_encode($test,JSON_UNESCAPED_UNICODE),
     ],[
         "id"=>$data['id']

@@ -18,7 +18,7 @@ echo \Joonika\Forms::form_create([
 $userID = isset($_POST['userID']) ? $_POST['userID'] : JK_LOGINID();
 if (isset($_POST['submit'])) {
     if ($_POST['id'] != "") {
-        $database->update('jgate_services', [
+        $database->update('jgate.jgate_services', [
             "type" => $_POST['type'],
             "slug" => $_POST['slug'],
             "title" => $_POST['title'],
@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
             "id"=>$_POST['id']
         ]);
     } else {
-        $database->insert('jgate_services', [
+        $database->insert('jgate.jgate_services', [
             "type" => $_POST['type'],
             "slug" => $_POST['slug'],
             "title" => $_POST['title'],
@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
     echo redirect_to_js();
 }
 if ($_POST['id'] != "") {
-    $data = $database->get('jgate_services', '*', [
+    $data = $database->get('jgate.jgate_services', '*', [
         "id" => $_POST['id']
     ]);
 }

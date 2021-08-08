@@ -6,7 +6,7 @@ if (!empty($_POST['order'])) {
         $sort = 0;
         foreach ($order['relationSort_'.$serviceID] as $pv) {
             $database=\Joonika\Database::connect();
-            $database->update('jgate_services_rel', [
+            $database->update('jgate.jgate_services_rel', [
                 "sort" => $sort
             ], [
                 "AND" => [

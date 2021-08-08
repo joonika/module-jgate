@@ -35,7 +35,7 @@ class jgate
         if (empty(self::$database)) {
             self::$database = Database::connect();
         }
-        $gate = self::$database->get('jgate_gateways', '*', [
+        $gate = self::$database->get('jgate.jgate_gateways', '*', [
             "id" => self::$gatewayId,
         ]);
         if ($gate) {
@@ -84,8 +84,8 @@ class jgate
 
         } else {
 
-            $service = self::$database->get("jgate_services_rel(gsr)", [
-                "[>]jgate_services(gs)" => ["gsr.sId" => "id"]
+            $service = self::$database->get("jgate.jgate_services_rel(gsr)", [
+                "[>]jgate.jgate_services(gs)" => ["gsr.sId" => "id"]
             ], [
                 "gsr.address",
                 "gs.slug",
@@ -214,7 +214,7 @@ class jgate
                     if (isset($is_json['data']['token'])) {
                         self::$token = $is_json['data']['token'];
                         self::$tokenDate = date("Y/m/d H:i:s");
-                        self::$database->update('jgate_gateways', [
+                        self::$database->update('jgate.jgate_gateways', [
                             "lastToken" => self::$token,
                             "lastTokenDate" => self::$tokenDate,
                             "lastCheckToken" => $response,

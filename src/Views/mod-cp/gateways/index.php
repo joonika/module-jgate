@@ -18,7 +18,7 @@ get_head($this);
 <?php
 echo div_container_row();
 
-$gateways = $database->select('jgate_gateways', '*', [
+$gateways = $database->select('jgate.jgate_gateways', '*', [
     "status[!]" => "removed",
     "ORDER" => "sort"
 ]);

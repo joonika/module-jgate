@@ -13,7 +13,7 @@ AstCtrl::ADD_HEADER_STYLES_FILES('/assets/datatable-1-10-24/datatables.css');
 AstCtrl::ADD_FOOTER_JS_FILES('/assets/datatable-1-10-24/datatables.min.js');
 get_head($this);
 
-$gateway = $database->get('jgate_gateways', '*', [
+$gateway = $database->get('jgate.jgate_gateways', '*', [
     "AND" => [
         "status[!]" => "removed",
         "id" => !empty($this->Route->path[3]) ? $this->Route->path[3] : 0,

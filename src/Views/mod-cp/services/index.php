@@ -40,7 +40,7 @@ get_head($this);
                     <tbody>
                     <?php
 
-                    $gateways = $database->select("jgate_gateways", [
+                    $gateways = $database->select("jgate.jgate_gateways", [
                         "id" => [
                             'id',
                             'title',
@@ -48,7 +48,7 @@ get_head($this);
                             'servicesJson',
                         ]
                     ]);
-                    $services = $database->select('jgate_services', '*', [
+                    $services = $database->select('jgate.jgate_services', '*', [
                         "ORDER" => "id"
                     ]);
                     if (checkArraySize($services)) {
@@ -73,7 +73,7 @@ get_head($this);
                                 <td class="text-center p-0 " style="padding: 0!important;">
                                     <div id="nestable_service_<?= $service['id'] ?>" class="relativeNestable">
                                         <?php
-                                        $relations = $database->select("jgate_services_rel", '*', [
+                                        $relations = $database->select("jgate.jgate_services_rel", '*', [
                                             "AND" => [
                                                 "status[!]" => 0,
                                                 "sId" => $service['id'],

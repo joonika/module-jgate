@@ -2,7 +2,7 @@
 $servicesArray = [];
 $database = \Joonika\Database::connect();
 if (!empty($_POST['gId'])) {
-    $gatewayServices = $database->get("jgate_gateways", 'servicesJson', [
+    $gatewayServices = $database->get("jgate.jgate_gateways", 'servicesJson', [
         "id" => $_POST['gId']
     ]);
     if (empty($gatewayServices)) {

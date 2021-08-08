@@ -12,7 +12,7 @@ if (!$ACL->hasPermission('jgate_gateways')) {
 }
 $database = \Joonika\Database::connect();
 
-$gateways = $database->select("jgate_gateways", [
+$gateways = $database->select("jgate.jgate_gateways", [
     "id" => [
         'id',
         'title',
@@ -37,7 +37,7 @@ foreach ($gateways as $gateway) {
                 "tokenless"=> $service['tokenless'] ?? 0,
             ]);
         }
-        $database->update('jgate_gateways', [
+        $database->update('jgate.jgate_gateways', [
             "servicesJson" => json_encode($dataInput, 256)
         ], [
             "id" => $gateway['id']

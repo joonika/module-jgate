@@ -5,7 +5,7 @@ if (!$ACL->hasPermission('jgate_gateways')) {
     error403();
     die;
 }
-$data = $database->update('jgate_gateways', [
+$data = $database->update('jgate.jgate_gateways', [
     "lastToken" => null,
     "lastTokenDate" => null,
     "lastCheckToken" => null,
