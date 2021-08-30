@@ -182,13 +182,14 @@ class jgate
         } else {
             if (!self::$token || empty(self::$tokenDate) || strtotime(self::$tokenDate) <= strtotime("-15 min")) {
                 $curl = curl_init();
+                $ip='';
                 if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
                     $ip = $_SERVER['HTTP_CLIENT_IP'];
                 } //whether ip is from the proxy
                 elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
                     $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
                 } //whether ip is from the remote address
-                else {
+                elseif(isset($_SERVER['REMOTE_ADDR'])) {
                     $ip = $_SERVER['REMOTE_ADDR'];
                 }
 
@@ -277,18 +278,23 @@ class jgate
             array_push($http_request_header, 'Content-Type: application/json');
             $postArray = json_encode($postArray, 256);
         }
-
+        $ip='';
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             $ip = $_SERVER['HTTP_CLIENT_IP'];
         } //whether ip is from the proxy
         elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
         } //whether ip is from the remote address
-        else {
+        elseif(isset($_SERVER['REMOTE_ADDR'])) {
             $ip = $_SERVER['REMOTE_ADDR'];
         }
         array_push($http_request_header, "clientIp: " . $ip);
         array_push($http_request_header, "serverType: " . JK_SERVER_TYPE);
+//        jdie(self::$serviceName);
+//        if(self::$serviceName=='srp_trip_reserve'){
+//            jdie($postArray);
+//        }
+//        jdie(4);
         if (self::$needToken && !in_array($serviceAddress, ['getToken', 'checkToken'])) {
             array_push($http_request_header, "token: " . self::$token);
             curl_setopt_array($curl, array(
