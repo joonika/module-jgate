@@ -135,7 +135,7 @@ class jgate
                 if (!empty($addressF)) {
                     foreach ($addressF as $ad) {
                         if ($ad['address'] == $serviceName) {
-                            if ($ad['tokenless'] == 1) {
+                            if ($ad['tokenLess'] == 1) {
                                 self::$needToken = false;
                                 break;
                             }

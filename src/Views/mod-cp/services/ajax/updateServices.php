@@ -34,7 +34,7 @@ foreach ($gateways as $gateway) {
         foreach ($servicesData as $service) {
             array_push($dataInput, [
                 "address"=>$service['name'] . '/' . $service['method'],
-                "tokenless"=> $service['tokenless'] ?? 0,
+                "tokenLess"=> $service['tokenLess'] ?? 0,
             ]);
         }
         $database->update('jgate.jgate_gateways', [
