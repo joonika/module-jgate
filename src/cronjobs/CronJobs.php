@@ -18,7 +18,7 @@ class CronJobs extends \Joonika\CronJobs
     public function removeExpired()
     {
         $database = \Joonika\Database::connect();
-        $database->update('jgate.gateway_cache', [
+        $database->update('jgate.jgate_cache', [
             "status" => 0
         ], [
             "expireDate[<=]" => now(),
