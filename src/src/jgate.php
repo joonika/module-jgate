@@ -172,7 +172,6 @@ class jgate
         if (empty(self::$needToken)) {
             return [200, __("not need token")];
         }
-
         if (empty(self::$instance[self::$gatewayId])) {
             self::$instance[self::$gatewayId] = new self();
         }
