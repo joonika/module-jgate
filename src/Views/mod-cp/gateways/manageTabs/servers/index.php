@@ -74,7 +74,7 @@ if (isset($gatewayID)) {
 function addServer(serverId=\'\') {
   $("#modal_global").modal("show");
       ' . ajax_load([
-            "url" => JK_DOMAIN_LANG() . 'cp/jgate/gateways/manageTabs/servers/addserver',
+            "url" => JK_DOMAIN_LANG() . 'cp/jgate/gateways/manageTabs/servers/addServer',
             "data" => "{gatewayId:" . $gatewayID . ",serverId:serverId}",
             "success_response" => "#modal_global_body",
             "loading" => ['iclass-size' => 1, 'elem' => 'span']
